@@ -16,7 +16,7 @@ public class PlayerControls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         cameraPosDif = -playerSphere.transform.forward;
-        cameraPosDif.y = 2.0f;
+        cameraPosDif.y = 0.6f;
 
     }
 
@@ -30,8 +30,9 @@ public class PlayerControls : MonoBehaviour
 
     void UpdateCamera()
     {
-        cameraRef.transform.position = transform.position - cameraPosDif * -1;
+        cameraRef.transform.position = transform.position - cameraPosDif * -2f;
         cameraRef.transform.forward = transform.position - cameraRef.transform.position;
+        cameraRef.transform.eulerAngles = new Vector3(5.0f, cameraRef.transform.rotation.y, cameraRef.transform.rotation.z);
     }
 
     void UpdatePosition()
