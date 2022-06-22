@@ -23,26 +23,28 @@ public class PlayerControls : MonoBehaviour
 
         cameraPosDif = -playerSphere.transform.forward;
         cameraPosDif.y = 0.6f;
+        rb = playerSphere.GetComponent<Rigidbody>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateInput();
+        UpdateKeyboardInput();
+        UpdateMouseInput();
         UpdateCamera();
         UpdatePosition();
 
     }
 
-    void UpdateCamera()
+    private void UpdateCamera()
     {
         cameraRef.transform.position = playerSphere.transform.position - cameraPosDif * -2f;
         cameraRef.transform.forward = playerSphere.transform.position - cameraRef.transform.position;
         cameraRef.transform.eulerAngles = new Vector3(5.0f, cameraRef.transform.rotation.y, cameraRef.transform.rotation.z);
     }
 
-    void UpdatePosition()
+    private void UpdatePosition()
     {
         //Debug.Log("Player Pos: " + transform.position);
         //Debug.Log("Sphere Pos: " + playerSphere.transform.position);
@@ -51,7 +53,23 @@ public class PlayerControls : MonoBehaviour
         playerSphere.transform.position = lastLoc;
     }
 
-    void UpdateInput()
+
+    private void UpdateMouseInput()
+    {
+        //Mouse Left
+        if (Input.GetAxis("Mouse X") < 0)
+        {
+
+        }
+
+        //Mouse Right
+        if (Input.GetAxis("Mouse X") > 0)
+        {
+
+        }
+    }
+
+    private void UpdateKeyboardInput()
     {
         if(Input.GetKey(KeyCode.W))
         {
