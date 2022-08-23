@@ -11,6 +11,9 @@ public class PlayerControls : MonoBehaviour
 
     public Rigidbody rb;
 
+    public GameObject r1;
+    public GameObject r2;
+
 
 
     // Start is called before the first frame update
@@ -124,6 +127,34 @@ public class PlayerControls : MonoBehaviour
         {
             rb.AddRelativeForce(Vector3.right * moveSpeed);
         }
+
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            if(r1.GetComponent<Renderer>().enabled)
+            {
+                r1.GetComponent<Renderer>().enabled = false;
+
+            }
+            else
+            {
+                r1.GetComponent<Renderer>().enabled = true;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Alpha4))
+        {
+            if (r2.GetComponent<Renderer>().enabled)
+            {
+                r2.GetComponent<Renderer>().enabled = false;
+
+            }
+            else
+            {
+                r2.GetComponent<Renderer>().enabled = true;
+            }
+        }
+
+      
 
         if (Input.GetKey(KeyCode.Space))
         {

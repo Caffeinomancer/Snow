@@ -8,6 +8,9 @@ public class TowerScript : MonoBehaviour
 
     private bool canRotate = true;
 
+    public Sprite smile;
+    public Sprite smilewtf;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,18 @@ public class TowerScript : MonoBehaviour
     void Update()
     {
         LookAtCamera();
+
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = smile;
+        }
+
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = smilewtf;
+        }
+
+
     }
 
     private void LookAtCamera()
