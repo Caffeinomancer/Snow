@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControls : MonoBehaviour
+public class LEGACYPlayerControls : MonoBehaviour
 {
     public GameObject playerSphere;
     public GameObject cameraRef;
@@ -11,7 +11,7 @@ public class PlayerControls : MonoBehaviour
     public float moveSpeed = 1;
     public float cameraSpeed = 5.0f;
 
-    public PlayerFeet playerFeet;
+    public LEGACYPlayerFeet playerFeet;
 
     private Vector3 cameraPosDif;
 

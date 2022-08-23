@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFeet : MonoBehaviour
+public class LEGACYPlayerFeet : MonoBehaviour
 {
 
-    public PlayerControls playerControls;
+    public LEGACYPlayerControls playerControls;
 
     // Start is called before the first frame update
     void Start()
