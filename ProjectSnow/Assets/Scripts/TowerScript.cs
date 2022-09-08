@@ -22,15 +22,7 @@ public class TowerScript : MonoBehaviour
     {
         LookAtCamera();
 
-        if (Input.GetKey(KeyCode.Alpha1))
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = smile;
-        }
-
-        if (Input.GetKey(KeyCode.Alpha2))
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = smilewtf;
-        }
+       
 
 
     }
