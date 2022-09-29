@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public float mouseSensitivity = 1.0f;
+    public float mouseSensitivity;
 
-    private float cameraRotationX = 0.0f;
-    private float cameraRotationY = 0.0f;
+    private float cameraRotationX;
+    private float cameraRotationY;
 
     public bool lockCursor = true;
 

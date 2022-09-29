@@ -49,7 +49,6 @@ public class EnemyScript : MonoBehaviour
             else
             {
                 transform.position = Vector3.Lerp(spawnLocation, destinationOne, fractionOfJourney);
-                Debug.Log("Moving Right");
             }
         }
 
@@ -67,7 +66,6 @@ public class EnemyScript : MonoBehaviour
             else
             {
                 transform.position = Vector3.Lerp(spawnLocation, destinationTwo, fractionOfJourney);
-                Debug.Log("Moving Left");
             }
         }
     }
