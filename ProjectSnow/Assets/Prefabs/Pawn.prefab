@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1142790038181349085}
   - component: {fileID: 6845663044273598783}
+  - component: {fileID: 1741660949286124686}
   m_Layer: 0
   m_Name: SPRITE_SPAWN_WHITE
   m_TagString: Untagged
@@ -84,6 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1741660949286124686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417037441590957111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e959e35f8ef57499406c9e1bda8113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraRef: {fileID: 0}
 --- !u!1 &4236300774877013494
 GameObject:
   m_ObjectHideFlags: 0

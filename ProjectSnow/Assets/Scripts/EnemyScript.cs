@@ -17,10 +17,11 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         spawnLocation = transform.position;
         destinationOne = new Vector3(spawnLocation.x + 20, spawnLocation.y, spawnLocation.z);
         destinationTwo = new Vector3(spawnLocation.x - 20, spawnLocation.y, spawnLocation.z);
-
+       
         startTime = Time.time;
         journeyLength = Vector3.Distance(spawnLocation, destinationOne);
     }
