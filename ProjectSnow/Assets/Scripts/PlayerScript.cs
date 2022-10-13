@@ -35,7 +35,6 @@ public class PlayerScript : MonoBehaviour
         if(Input.GetMouseButton(0)) // LEFT CLICK
         {
             CheckInteraction();
-            
         }
 
 
