@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
     public float groundDrag;
+    public float wallRunSpeed;
     
     [Header("Jumping")]
     public float jumpForce;
@@ -49,8 +50,11 @@ public class PlayerMovement : MonoBehaviour
     {
         walking,
         sprinting,
-        air
+        air,
+        wallrunning
     }
+
+    public bool wallRunning;
 
     void Start()
     {
@@ -101,6 +105,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void StateHandler()
     {
+        if(wallRunning)
+        {
+            state = MovementState.wallrunning;
+            moveSpeed = wallRunSpeed;
+        }
+
         //Sprinting 
         if(isGrounded && Input.GetKey(sprintKey))
         {

@@ -17,6 +17,5 @@ public class MoveCamera : MonoBehaviour
         {
             Debug.LogError("Camera tranform not set in MoveCamera script");
         }
-
     }
 }
