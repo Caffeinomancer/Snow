@@ -84,7 +84,6 @@ public class WallRunning : MonoBehaviour
 
             if(Input.GetKeyDown(jumpKey))
             {
-                Debug.Log("WallJump");
                 WallJump();
             }
         }
