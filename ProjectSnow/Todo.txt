@@ -1,0 +1,1 @@
+Increase player size, make sure movement about raycast heights etc arent tied to magic numbers, adjust accordingly, increase size by 3x maybe?
