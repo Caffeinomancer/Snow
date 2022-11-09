@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
+    public KeyCode escapeKey = KeyCode.Escape;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -101,6 +103,11 @@ public class PlayerMovement : MonoBehaviour
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+
+        if(Input.GetKey(escapeKey))
+        {
+            Application.Quit();
         }
     }
 
@@ -218,7 +225,5 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 GetSlopeMoveDirection()
     {
         return Vector3.ProjectOnPlane(movementDirection, slopeHit.normal).normalized;
-    }    
-
-  
+    }
 }

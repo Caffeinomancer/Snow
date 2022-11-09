@@ -31,7 +31,8 @@ public class TowerScript : MonoBehaviour
             {
                 transform.LookAt(cameraRef.transform.position, -Vector3.up);
                 transform.rotation = new Quaternion(0.0f, transform.rotation.y, 0.0f, transform.rotation.w);
-                transform.forward = new Vector3(cameraRef.transform.forward.x, transform.forward.y, cameraRef.transform.forward.z);
+                
+                //transform.forward = new Vector3(cameraRef.transform.forward.x, transform.forward.y, cameraRef.transform.forward.z);
             }
         }
     }

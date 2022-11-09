@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -9,18 +10,35 @@ public class PlayerCamera : MonoBehaviour
     private float cameraRotationX;
     private float cameraRotationY;
 
-    public bool lockCursor = true;
-
     public Transform orientation;
+
+    private bool trackMouse = false;
 
     void Start()
     {
-        LockCursor();
+        //LockCursor();
     }
 
     void Update()
     {
-        UpdateMouseInput();
+        if (trackMouse)
+        {
+            UpdateMouseInput();
+        }
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if(focus)
+        {
+            trackMouse = true;
+            LockCursor(true);
+        }
+        else
+        {
+            trackMouse = false;
+            LockCursor(false);
+        }
     }
 
     //TODO: CLEAN UP THIS FUNCTION
@@ -38,7 +56,7 @@ public class PlayerCamera : MonoBehaviour
         orientation.rotation = Quaternion.Euler(0, cameraRotationY, 0);
     }
 
-    private void LockCursor()
+    private void LockCursor(bool lockCursor)
     {
         if (lockCursor)
         {
