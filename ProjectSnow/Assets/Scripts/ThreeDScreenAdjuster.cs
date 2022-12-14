@@ -20,9 +20,12 @@ public class ThreeDScreenAdjuster : MonoBehaviour
     private GameObject pixelList;
     public int screenSize = 128;
     public int pixelSize = 1; //Size of each pixel, change this accordingly!
+    private GameObject[,] pixelListRefs; //2D array of pixels
 
     [Header("Video")]
     public VideoPlayer videoPlayer;
+    private Texture2D currentVideoFrame;
+    private AudioSource audioSource;
 
     private float cubeSizeX;
     private float cubeSizeY;
@@ -51,8 +54,16 @@ public class ThreeDScreenAdjuster : MonoBehaviour
         videoPlayer.prepareCompleted += Prepared;
         videoPlayer.sendFrameReadyEvents = true;
         videoPlayer.frameReady += FrameReady;
-        videoPlayer.Prepare();
         
+
+        
+        
+        videoPlayer.Prepare();
+
+
+        pixelListRefs = new GameObject[screenSize, screenSize];
+
+        GenerateScreen();
 
     }
 
@@ -60,19 +71,113 @@ public class ThreeDScreenAdjuster : MonoBehaviour
 
     void FrameReady(VideoPlayer videoPlayer, long frameIndex)
     {
-        var textureToCopy = videoPlayer.texture;
+        Texture texToCopy = videoPlayer.texture;
+        RenderTexture renTexTmp = RenderTexture.GetTemporary(screenSize, screenSize, 0, RenderTextureFormat.Default, RenderTextureReadWrite.Linear);
 
-        //perform texture copy here;
+        Graphics.Blit(texToCopy, renTexTmp); // Blitting pixels from texture to render texture
+        RenderTexture previous = RenderTexture.active; //Backup current RenderTexture
+        RenderTexture.active = renTexTmp; //Set current RenderTexture to temporary one we created
 
-        videoPlayer.frame = frameIndex + 30;
+        currentVideoFrame = new Texture2D(screenSize, screenSize);
+        currentVideoFrame.ReadPixels(new Rect(0, 0, screenSize, screenSize), 0, 0);
+        currentVideoFrame.Apply();
+
+        RenderTexture.active = previous; //Reset active RenderTexture
+
+        RenderTexture.ReleaseTemporary(renTexTmp); //Release the temporary RenderTexture
+
+
+
+        videoPlayer.frame = frameIndex;
+
+        Color pixCol;
+
+        for (int i = 0; i < screenSize; i++)
+        {
+            for (int j = 0; j < screenSize; j++)
+            {
+                if (currentVideoFrame != null)
+                {
+                    pixCol = currentVideoFrame.GetPixel(i, j);
+
+                    if (pixCol == Color.black)
+                    {
+                        pixelListRefs[i, j].SetActive(true);
+                    }
+                    else
+                    {
+                        pixelListRefs[i, j].SetActive(false);
+                    }
+                }
+
+                else
+                {
+                    Debug.Log("i: " + i + " j: " + j);
+                }
+
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!videoPlayer.isPlaying)
+            videoPlayer.Play();
+        //240x160
+        //Debug.Log("Curr Frame " + currentVideoFrame.GetPixel(0,0));
+        //Debug.Log("First Pix " + pixelListRefs[0,0]);
+        //Debug.Log("Random Pix " + pixelListRefs[31, 31]);
+
+        /*if(currentVideoFrame.GetPixel(0,0) == Color.black)
+        {
+            Debug.Log("Black");
+        }
         
+        else
+        {
+            Debug.Log("White");
+        }*/
+        UpdatePixels();
+
+
     }
 
+    private void FixedUpdate()
+    {
+
+    }
+
+    public void UpdatePixels()
+    {
+        /*Color pixCol;
+
+        for(int i = 0; i < screenSize; i++)
+        {
+            for(int j = 0; j < screenSize; j++)
+            {
+                if(currentVideoFrame != null)
+                {
+                    pixCol = currentVideoFrame.GetPixel(i, j);
+
+                    if (pixCol == Color.black)
+                    {
+                        pixelListRefs[i, j].SetActive(false);
+                    }
+                    else
+                    {
+                        pixelListRefs[i, j].SetActive(true);
+                    }
+                }
+               
+                else
+                {
+                    Debug.Log("i: " + i + " j: " + j);
+                }
+
+            }
+        }*/
+    }
 
     public void GenerateScreen()
     {
@@ -90,15 +195,20 @@ public class ThreeDScreenAdjuster : MonoBehaviour
 
         pixelList = new GameObject("PixelList");
         pixelList.transform.parent = transform;
-        
-        //Can take awhile, complexity O(n) n=screenSize^2
-        for (int i = 0; i < screenSize; i++)
+
+
+        int iter = 0; //Var to help with assigning objects to the 2D array
+        //Can take awhile, complexity O(n) n=screenSize^2 
+        for (int i = screenSize; i > 0; i--)//Reverse order because 2D textures track pixels from bottom up
         {
+           
             for(int j = 0; j < screenSize; j++)
             {
-                GameObject newPixel = Instantiate(pixel, new Vector3(transform.position.x + i, transform.position.y - j, transform.position.z), Quaternion.identity, pixelList.transform);
-                newPixel.gameObject.SetActive(false);
+                pixelListRefs[iter, j] = Instantiate(pixel, new Vector3(transform.position.x + iter, transform.position.y + j, transform.position.z), Quaternion.identity, pixelList.transform);
+                pixelListRefs[iter, j].gameObject.SetActive(false);
             }
+
+            iter++;
         }
     }
 

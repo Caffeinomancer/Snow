@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+/*
 [CustomEditor(typeof(ThreeDScreenAdjuster))]
 public class ThreeDScreenAdjusterEditor : Editor
 {
-    public override void OnInspectorGUI()
+    /*public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
@@ -21,4 +21,4 @@ public class ThreeDScreenAdjusterEditor : Editor
             myScript.DeleteScreen();
         }
     }
-}
+}*/
