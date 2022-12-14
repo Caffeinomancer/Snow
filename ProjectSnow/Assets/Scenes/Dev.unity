@@ -320,9 +320,10 @@ MonoBehaviour:
   bottomLeft: {fileID: 983118103}
   bottomRight: {fileID: 1037431423}
   pixel: {fileID: 4793880562672103739, guid: 3d9e97a76be71894b9c3e021b4975627, type: 3}
-  screenSize: 64
+  screenSize: 128
   pixelSize: 1
   videoPlayer: {fileID: 1084915716}
+  audioSource: {fileID: 1084915717}
 --- !u!4 &191333936
 Transform:
   m_ObjectHideFlags: 0
@@ -331,7 +332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191333934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.5, y: 11.6, z: 58.9}
+  m_LocalPosition: {x: -62.8, y: 132, z: 118.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3049,7 +3050,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983118103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -63, z: 0}
+  m_LocalPosition: {x: 0, y: -127, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3243,7 +3244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037431423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63, y: -63, z: 0}
+  m_LocalPosition: {x: 127, y: -127, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3303,19 +3304,17 @@ VideoPlayer:
   m_AspectRatio: 2
   m_DataSource: 0
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 1
-  m_TargetAudioSources:
-  - {fileID: 1084915717}
-  m_DirectAudioVolumes:
-  - 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 0
-  m_SkipOnDrop: 0
+  m_SkipOnDrop: 1
   m_Looping: 0
-  m_WaitForFirstFrame: 1
+  m_WaitForFirstFrame: 0
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
 --- !u!82 &1084915717
@@ -3330,7 +3329,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7afd0ecf9e3427d43b062ce0234206d8, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.291
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4293,7 +4292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1862538830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63, y: 0, z: 0}
+  m_LocalPosition: {x: 127, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

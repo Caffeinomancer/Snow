@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -24,8 +25,8 @@ public class ThreeDScreenAdjuster : MonoBehaviour
 
     [Header("Video")]
     public VideoPlayer videoPlayer;
+    public AudioSource audioSource;
     private Texture2D currentVideoFrame;
-    private AudioSource audioSource;
 
     private float cubeSizeX;
     private float cubeSizeY;
@@ -59,11 +60,14 @@ public class ThreeDScreenAdjuster : MonoBehaviour
         
         
         videoPlayer.Prepare();
+        //audioSource = videoPlayer.GetTargetAudioSource();
 
 
         pixelListRefs = new GameObject[screenSize, screenSize];
 
         GenerateScreen();
+
+        //StartCoroutine(UpdateScreen());
 
     }
 
@@ -86,9 +90,6 @@ public class ThreeDScreenAdjuster : MonoBehaviour
 
         RenderTexture.ReleaseTemporary(renTexTmp); //Release the temporary RenderTexture
 
-
-
-        videoPlayer.frame = frameIndex;
 
         Color pixCol;
 
@@ -117,13 +118,61 @@ public class ThreeDScreenAdjuster : MonoBehaviour
 
             }
         }
+
+        //videoPlayer.frame = frameIndex;
+        Debug.Log("Frame");
+        //videoPlayer.frameReady -= FrameReady;
+    }
+
+    private IEnumerator UpdateScreen()
+    {
+        Color pixCol;
+        if(videoPlayer.isPlaying)
+        {
+            for (int i = 0; i < screenSize; i++)
+            {
+                for (int j = 0; j < screenSize; j++)
+                {
+                    if (currentVideoFrame != null)
+                    {
+                        pixCol = currentVideoFrame.GetPixel(i, j);
+
+                        if (pixCol == Color.black)
+                        {
+                            pixelListRefs[i, j].SetActive(true);
+                        }
+                        else
+                        {
+                            pixelListRefs[i, j].SetActive(false);
+                        }
+                    }
+
+                    else
+                    {
+                        Debug.Log("i: " + i + " j: " + j);
+                    }
+
+                }
+
+                yield return null;
+            }
+        }
+        yield return null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!videoPlayer.isPlaying)
-            videoPlayer.Play();
+        
+
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            if (!videoPlayer.isPlaying)
+            {
+                videoPlayer.Play();
+                audioSource.Play();
+            }
+        }
         //240x160
         //Debug.Log("Curr Frame " + currentVideoFrame.GetPixel(0,0));
         //Debug.Log("First Pix " + pixelListRefs[0,0]);
@@ -138,7 +187,7 @@ public class ThreeDScreenAdjuster : MonoBehaviour
         {
             Debug.Log("White");
         }*/
-        UpdatePixels();
+        //UpdatePixels();
 
 
     }
@@ -204,7 +253,7 @@ public class ThreeDScreenAdjuster : MonoBehaviour
            
             for(int j = 0; j < screenSize; j++)
             {
-                pixelListRefs[iter, j] = Instantiate(pixel, new Vector3(transform.position.x + iter, transform.position.y + j, transform.position.z), Quaternion.identity, pixelList.transform);
+                pixelListRefs[iter, j] = Instantiate(pixel, new Vector3(transform.position.x + iter, (transform.position.y - screenSize) + j, transform.position.z), Quaternion.identity, pixelList.transform);
                 pixelListRefs[iter, j].gameObject.SetActive(false);
             }
 
